@@ -116,7 +116,7 @@ class VardorvisCLI:
             try:
                 # Get input without blocking
                 if sys.stdin.isatty():
-                    if os.name == "nt":  # Windows
+                    if sys.platform == "win32":
                         # Wait for input event
                         win32event.WaitForSingleObject(self.stdin_handle, 100)
                         if msvcrt.kbhit():
@@ -147,7 +147,24 @@ class VardorvisCLI:
                         ready, _, _ = select.select([sys.stdin], [], [], 0.1)
                         if not ready:
                             continue
+                        # Read first character
                         char = sys.stdin.read(1)
+                        # Check for escape sequence (arrow keys start with \x1b)
+                        if char == '\x1b':
+                            # Read the next two characters
+                            next_chars = sys.stdin.read(2)
+                            if next_chars == '[A':  # Up arrow
+                                self.navigate_history(UP)
+                                continue
+                            elif next_chars == '[B':  # Down arrow
+                                self.navigate_history(DOWN)
+                                continue
+                            else:
+                                continue  # Ignore other escape sequences
+                        elif char == '\x7f':  # Backspace in Unix
+                            char = '\b'  # Convert to Windows-style backspace
+                        elif char == '\r':  # Carriage return
+                            char = '\n'  # Convert to newline
 
                     if char == "\n":
                         # Process the command
