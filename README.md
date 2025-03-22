@@ -1,6 +1,6 @@
 # vardorvis
 
-Vardorvis is a custom CLI Tool that manages user input and program messages seamlessly, in support of optimal user experience. Allows user to navigate through previously issued commands.
+Vardorvis is a custom Win32 CLI Tool that manages user input and program messages seamlessly, in support of optimal user experience. Allows user to navigate through previously issued commands.
 
 It is named after the Old School Runescape boss from Desert Treasure II. Below is a gif of the program running.
 
