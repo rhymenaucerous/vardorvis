@@ -9,3 +9,5 @@ It is named after the Old School Runescape boss from Desert Treasure II. Below i
 **Figure 1.** *Vardorvis UI GIF.*
 
 ASCII art pulled from https://www.asciiart.eu/weapons/axes credit to Marcin Glinski
+
+End of file
