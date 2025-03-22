@@ -3,12 +3,15 @@ import sys
 import os
 import threading
 import queue
-import time
-import select
-import msvcrt
-import win32event
-import win32con
-import win32api
+
+if sys.platform == "win32":
+    import msvcrt
+    import win32event
+    import win32con
+    import win32api
+else:
+    import select
+    
 from typing import Optional
 
 UP = 1
@@ -309,5 +312,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# End of file
