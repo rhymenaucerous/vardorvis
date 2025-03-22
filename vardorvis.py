@@ -149,8 +149,9 @@ class VardorvisCLI:
                             continue
                         # Read first character
                         char = sys.stdin.read(1)
-                        # Check for escape sequence (arrow keys start with \x1b)
-                        if char == '\x1b':
+                        
+                        # Handle special characters
+                        if char == '\x1b':  # Escape sequence
                             # Read the next two characters
                             next_chars = sys.stdin.read(2)
                             if next_chars == '[A':  # Up arrow
@@ -162,9 +163,23 @@ class VardorvisCLI:
                             else:
                                 continue  # Ignore other escape sequences
                         elif char == '\x7f':  # Backspace in Unix
-                            char = '\b'  # Convert to Windows-style backspace
+                            if self.current_input:
+                                self.current_input = self.current_input[:-1]
+                                self.move_cursor_to_start()
+                                self.clear_line()
+                                sys.stdout.write(self.prompt + self.current_input)
+                                sys.stdout.flush()
+                            continue
                         elif char == '\r':  # Carriage return
                             char = '\n'  # Convert to newline
+                        elif char == '\x04':  # Ctrl+D (EOF)
+                            self.running = False
+                            self.shutdown_event.set()
+                            continue
+                        elif char == '\x03':  # Ctrl+C
+                            self.running = False
+                            self.shutdown_event.set()
+                            continue
 
                     if char == "\n":
                         # Process the command
