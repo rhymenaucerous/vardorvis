@@ -3,14 +3,10 @@ import sys
 import os
 import threading
 import queue
-
-if sys.platform == "win32":
-    import msvcrt
-    import win32event
-    import win32con
-    import win32api
-else:
-    import select
+import msvcrt
+import win32event
+import win32con
+import win32api
     
 from typing import Optional
 
@@ -116,70 +112,32 @@ class VardorvisCLI:
             try:
                 # Get input without blocking
                 if sys.stdin.isatty():
-                    if sys.platform == "win32":
-                        # Wait for input event
-                        win32event.WaitForSingleObject(self.stdin_handle, 100)
-                        if msvcrt.kbhit():
-                            # Get first byte
-                            first_byte = msvcrt.getch()
-                            # Check if it's a special key (arrow keys start with 224)
-                            if ord(first_byte) == 224:
-                                # Get second byte
-                                second_byte = msvcrt.getch()
-                                if ord(second_byte) == 72:  # Up arrow
-                                    self.navigate_history(UP)
-                                    continue
-                                elif ord(second_byte) == 80:  # Down arrow
-                                    self.navigate_history(DOWN)
-                                    continue
-                                else:
-                                    continue  # Ignore other arrow keys
-                            else:
-                                try:
-                                    char = first_byte.decode("utf-8")
-                                    if char == "\r":  # Windows uses \r for Enter
-                                        char = "\n"
-                                except UnicodeDecodeError:
-                                    continue  # Ignore invalid UTF-8 sequences
-                        else:
-                            continue
-                    else:  # Unix-like systems
-                        ready, _, _ = select.select([sys.stdin], [], [], 0.1)
-                        if not ready:
-                            continue
-                        # Read first character
-                        char = sys.stdin.read(1)
-                        
-                        # Handle special characters
-                        if char == '\x1b':  # Escape sequence
-                            # Read the next two characters
-                            next_chars = sys.stdin.read(2)
-                            if next_chars == '[A':  # Up arrow
+                    # Wait for input event
+                    win32event.WaitForSingleObject(self.stdin_handle, 100)
+                    if msvcrt.kbhit():
+                        # Get first byte
+                        first_byte = msvcrt.getch()
+                        # Check if it's a special key (arrow keys start with 224)
+                        if ord(first_byte) == 224:
+                            # Get second byte
+                            second_byte = msvcrt.getch()
+                            if ord(second_byte) == 72:  # Up arrow
                                 self.navigate_history(UP)
                                 continue
-                            elif next_chars == '[B':  # Down arrow
+                            elif ord(second_byte) == 80:  # Down arrow
                                 self.navigate_history(DOWN)
                                 continue
                             else:
-                                continue  # Ignore other escape sequences
-                        elif char == '\x7f':  # Backspace in Unix
-                            if self.current_input:
-                                self.current_input = self.current_input[:-1]
-                                self.move_cursor_to_start()
-                                self.clear_line()
-                                sys.stdout.write(self.prompt + self.current_input)
-                                sys.stdout.flush()
-                            continue
-                        elif char == '\r':  # Carriage return
-                            char = '\n'  # Convert to newline
-                        elif char == '\x04':  # Ctrl+D (EOF)
-                            self.running = False
-                            self.shutdown_event.set()
-                            continue
-                        elif char == '\x03':  # Ctrl+C
-                            self.running = False
-                            self.shutdown_event.set()
-                            continue
+                                continue  # Ignore other arrow keys
+                        else:
+                            try:
+                                char = first_byte.decode("utf-8")
+                                if char == "\r":  # Windows uses \r for Enter
+                                    char = "\n"
+                            except UnicodeDecodeError:
+                                continue  # Ignore invalid UTF-8 sequences
+                    else:
+                        continue
 
                     if char == "\n":
                         # Process the command
