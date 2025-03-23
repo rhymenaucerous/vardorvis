@@ -7,6 +7,7 @@ import msvcrt
 import win32event
 import win32con
 import win32api
+import time
     
 from typing import Optional
 
@@ -285,6 +286,11 @@ Available commands:
             self.running = False
             self.shutdown_event.set()  # Signal all threads to shut down
             print("\nShutting down...")
+        finally:
+            # Ensure all threads have time to clean up
+            time.sleep(0.1)
+            # Flush any remaining output
+            sys.stdout.flush()
 
 
 def main():
