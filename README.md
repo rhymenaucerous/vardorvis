@@ -29,6 +29,12 @@ pip install vardorvis-0.1.0-py3-none-any.whl
 vardorvis
 ```
 
+<img src="./README_Images/vardorvis_UI.gif" width="450" height="600">
+
+**Figure 1.** *Vardorvis UI GIF.*
+
+*ASCII art pulled from https://www.asciiart.eu/weapons/axes credit to Marcin Glinski*
+
 ## Available Commands
 
 - `help` - Display help information
@@ -41,14 +47,6 @@ vardorvis
 - Python 3.8 or higher
 - pywin32 (Windows only)
 
-
-Below is a gif of the program run.
-
-<img src="./README_Images/vardorvis_UI.gif" width="450" height="600">
-
-**Figure 1.** *Vardorvis UI GIF.*
-
-*ASCII art pulled from https://www.asciiart.eu/weapons/axes credit to Marcin Glinski*
-
+<br>
 
 End of file
