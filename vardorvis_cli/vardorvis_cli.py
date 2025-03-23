@@ -7,7 +7,6 @@ import msvcrt
 import win32event
 import win32con
 import win32api
-import time
     
 from typing import Optional
 
@@ -293,7 +292,7 @@ Available commands:
             sys.stdout.flush()
 
 
-def main():
+def RunCLI():
     try:
         cli = VardorvisCLI()
         cli.start()
@@ -304,7 +303,3 @@ def main():
     except ImportError as e:
         print(f"Required modules not found: {e}")
         print("Please ensure all required modules are installed.")
-
-
-if __name__ == "__main__":
-    main()

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vardorvis"
+version = "0.1.0"
+description = "A command-line interface with command history"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "rhymenaucerous", email = "christopher.r.elliott94@gmail.com" }
+]
+dependencies = [
+    "pywin32; sys_platform == 'win32'",
+]
+
+[project.urls]
+Homepage = "https://github.com/rhymenaucerous/vardorvis"
+Repository = "https://github.com/rhymenaucerous/vardorvis.git"
+
+[project.scripts]
+vardorvis = "vardorvis_cli.vardorvis_cli:RunCLI"
+
+[tool.hatch.build.targets.wheel]
+packages = ["vardorvis_cli"]
+
+[tool.hatch.build]
+include = [
+    "vardorvis_cli/**/*.py",
+] 
