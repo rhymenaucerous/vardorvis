@@ -37,9 +37,8 @@ class VardorvisCLI:
         )
 
         # Create Windows event handle for recognizing when keyboard is pressed
-        if os.name == "nt":
-            self.stdin_handle = win32api.GetStdHandle(win32con.INPUT_KEYBOARD)
-            self.input_event = win32event.CreateEvent(None, False, False, None)
+        self.stdin_handle = win32api.GetStdHandle(win32con.INPUT_KEYBOARD)
+        self.input_event = win32event.CreateEvent(None, False, False, None)
 
         # Print ASCII art in bright red
         ascii_art = '''
@@ -287,8 +286,9 @@ Available commands:
             self.shutdown_event.set()  # Signal all threads to shut down
             print("\nShutting down...")
         finally:
-            # Ensure all threads have time to clean up
-            time.sleep(0.1)
+            # Wait for threads to finish
+            input_thread.join(timeout=1.0)
+            output_thread.join(timeout=1.0)
             # Flush any remaining output
             sys.stdout.flush()
 
