@@ -1,0 +1,6 @@
+[2025-06-15 00:26:41] Executed: test
+[1m[32m[+][0m This is a test output
+[1m[33m[!][0m This is a test feedback
+[1m[31m[-][0m This is a test error
+[2025-06-15 00:26:43] Executed: exit
+[1m[33m[!][0m Exiting Vardorvis CLI

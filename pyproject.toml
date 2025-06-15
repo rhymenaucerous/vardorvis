@@ -1,32 +1,23 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
-name = "vardorvis"
+name = "vardorvis-cmd"
 version = "0.1.0"
-description = "A command-line interface with command history"
-readme = "README.md"
-requires-python = ">=3.8"
-license = "MIT"
+description = "custom command line interface"
 authors = [
-    { name = "rhymenaucerous", email = "christopher.r.elliott94@gmail.com" }
+    {name = "rhymenaucerous",email = "christopher.r.elliott94@gmail.com"}
 ]
+readme = "README.md"
+requires-python = ">=3.13"
 dependencies = [
-    "pywin32; sys_platform == 'win32'",
+    "cmd2 (>=2.6.1,<3.0.0)",
+    "termcolor (>=3.1.0,<4.0.0)",
+    "pathlib (>=1.0.1,<2.0.0)",
+    "datetime (>=5.5,<6.0)"
 ]
-
-[project.urls]
-Homepage = "https://github.com/rhymenaucerous/vardorvis"
-Repository = "https://github.com/rhymenaucerous/vardorvis.git"
 
 [project.scripts]
-vardorvis = "vardorvis_cli.vardorvis_cli:RunCLI"
+vard = "vardorvis_cmd.vardorvis_cmd:main"
 
-[tool.hatch.build.targets.wheel]
-packages = ["vardorvis_cli"]
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[tool.hatch.build]
-include = [
-    "vardorvis_cli/**/*.py",
-] 
