@@ -24,4 +24,28 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
 pylint = "^3.3.7"
+isort = "^6.0.1"
+pre-commit = "^4.2.0"
 
+[tool.pylint.messages_control]
+disable = []
+
+[tool.pylint.format]
+max-line-length = 88
+indent-string = "    "
+
+[tool.pylint.reports]
+output-format = "text"
+reports = false
+
+[tool.pylint.basic]
+bad-names = ["foo", "bar", "baz", "toto", "tutu", "tata"]
+include-naming-hint = false
+
+[tool.pylint.miscellaneous]
+notes = ["FIXME", "XXX", "TODO"]
+
+[tool.pylint.master]
+ignore = ["CVS"]
+persistent = true
+load-plugins = []
