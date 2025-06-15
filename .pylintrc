@@ -1,0 +1,23 @@
+# .pylintrc
+[MASTER]
+ignore=CVS
+persistent=yes
+load-plugins=
+
+[MESSAGES CONTROL]
+
+
+[FORMAT]
+max-line-length=88
+indent-string='    '
+
+[REPORTS]
+output-format=text
+reports=no
+
+[BASIC]
+bad-names=foo,bar,baz,toto,tutu,tata
+include-naming-hint=no
+
+[MISCELLANEOUS]
+notes=FIXME,XXX,TODO
