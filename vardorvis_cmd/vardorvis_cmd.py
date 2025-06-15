@@ -3,6 +3,7 @@
 Vardorvis Command Line Interface. Some custom logging additions to the cmd2 library.
 """
 
+# The cmd2 do_ functions require an argument, but we don't use them.
 # pylint: disable=unused-argument
 
 import datetime
@@ -41,6 +42,7 @@ class VardorvisCmd(Cmd):
         self.intro = colored(VARDORVIS_ASCII_ART, "red", attrs=["bold"])
         self.prompt = colored("vardorvis> ", "red", attrs=["bold"])
         self.logging_file = log_filename
+        self.help_text_color = "red"
         with open(self.logging_file, "w", encoding="utf-8") as f:
             f.close()
 
@@ -114,19 +116,11 @@ class VardorvisCmd(Cmd):
 
         return statement
 
-    def do_test(self, args):
-        """
-        Test the Vardorvis command line interface
-        """
-        self.voutput("This is a test output")
-        self.vfeedback("This is a test feedback")
-        self.verror("This is a test error")
-
     def do_exit(self, args):
         """
         Exit the Vardorvis command line interface
         """
-        self.vfeedback("Exiting Vardorvis CLI")
+        self.vfeedback("Exiting...")
         return True
 
 

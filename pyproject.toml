@@ -1,6 +1,6 @@
 [project]
 name = "vardorvis-cmd"
-version = "0.1.0"
+version = "0.2.0"
 description = "custom command line interface"
 authors = [
     {name = "rhymenaucerous",email = "christopher.r.elliott94@gmail.com"}
