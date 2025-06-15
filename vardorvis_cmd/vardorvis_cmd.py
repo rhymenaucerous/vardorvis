@@ -3,6 +3,7 @@
 Vardorvis Command Line Interface. Some custom logging additions to the cmd2 library.
 """
 
+# pylint: disable=unused-argument
 
 import datetime
 import pathlib
@@ -113,7 +114,7 @@ class VardorvisCmd(Cmd):
 
         return statement
 
-    def do_test(self):
+    def do_test(self, args):
         """
         Test the Vardorvis command line interface
         """
@@ -121,7 +122,7 @@ class VardorvisCmd(Cmd):
         self.vfeedback("This is a test feedback")
         self.verror("This is a test error")
 
-    def do_exit(self):
+    def do_exit(self, args):
         """
         Exit the Vardorvis command line interface
         """
