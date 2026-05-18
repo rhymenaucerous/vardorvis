@@ -18,7 +18,7 @@ source venv/bin/activate
 Download the python wheel from releases and run the command below.
 
 ```bash
-pip install vardorvis_cmd-0.2.0-py3-none-any.whl
+pip install vardorvis_cmd-0.4.0-py3-none-any.whl
 ```
 
 ## Usage
