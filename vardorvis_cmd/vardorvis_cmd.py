@@ -50,7 +50,8 @@ class VardorvisCmd(Cmd):
         """
         Print output to console and log to file
         """
-        vout = f"{colored("[+]", "green", attrs=["bold"])} {message}"
+        plus = colored("[+]", "green", attrs=["bold"])
+        vout = f"{plus} {message}"
         self.poutput(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -60,7 +61,9 @@ class VardorvisCmd(Cmd):
         Print async output to console and log to file
         """
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        vout = f"{colored(f"[{timestamp}] [+]", "green", attrs=["bold"])} {message}"
+        inner = f"[{timestamp}] [+]"
+        colored_inner = colored(inner, "green", attrs=["bold"])
+        vout = f"{colored_inner} {message}"
         self.async_alert(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -69,7 +72,8 @@ class VardorvisCmd(Cmd):
         """
         Print feedback to console and log to file
         """
-        vout = f"{colored("[!]", "yellow", attrs=["bold"])} {message}"
+        bang = colored("[!]", "yellow", attrs=["bold"])
+        vout = f"{bang} {message}"
         self.pfeedback(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -79,7 +83,9 @@ class VardorvisCmd(Cmd):
         Print async feedback to console and log to file
         """
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        vout = f"{colored(f"[{timestamp}] [!]", "yellow", attrs=["bold"])} {message}"
+        inner = f"[{timestamp}] [!]"
+        colored_inner = colored(inner, "yellow", attrs=["bold"])
+        vout = f"{colored_inner} {message}"
         self.async_alert(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -88,7 +94,8 @@ class VardorvisCmd(Cmd):
         """
         Print error to console and log to file
         """
-        vout = f"{colored("[-]", "red", attrs=["bold"])} {message}"
+        minus = colored("[-]", "red", attrs=["bold"])
+        vout = f"{minus} {message}"
         self.perror(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -98,7 +105,9 @@ class VardorvisCmd(Cmd):
         Print async error to console and log to file
         """
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        vout = f"{colored(f"[{timestamp}] [-]", "red", attrs=["bold"])} {message}"
+        inner = f"[{timestamp}] [-]"
+        colored_inner = colored(inner, "red", attrs=["bold"])
+        vout = f"{colored_inner} {message}"
         self.async_alert(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
