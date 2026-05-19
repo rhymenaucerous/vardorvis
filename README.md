@@ -4,7 +4,7 @@ Vardorvis Command Line Interface. Some custom logging and asynchronous feedback 
 
 ## Features
 
-Logs to vardorvis.log. Creates a file if one does not exist and appends to that file otherwise.
+Logs to vardorvis.log. Creates a file if one does not exist and clears any existing file otherwise.
 
 ## Set up your virtual environment
 
