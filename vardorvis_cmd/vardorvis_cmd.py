@@ -31,6 +31,11 @@ VARDORVIS_ASCII_ART = '''
                                         "Y88888888888888888P"
                                            ""YY8888888PP"'''
 
+# Colored characters for logging
+PLUS = colored("[+]", "green", attrs=["bold"])
+BANG = colored("[!]", "yellow", attrs=["bold"])
+MINUS = colored("[-]", "red", attrs=["bold"])
+
 
 class VardorvisCmd(Cmd):
     """
@@ -50,8 +55,7 @@ class VardorvisCmd(Cmd):
         """
         Print output to console and log to file
         """
-        plus = colored("[+]", "green", attrs=["bold"])
-        vout = f"{plus} {message}"
+        vout = f"{PLUS} {message}"
         self.poutput(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -64,7 +68,8 @@ class VardorvisCmd(Cmd):
         inner = f"[{timestamp}] [+]"
         colored_inner = colored(inner, "green", attrs=["bold"])
         vout = f"{colored_inner} {message}"
-        self.async_alert(vout)
+        with self.terminal_lock:
+            self.async_alert(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
 
@@ -72,8 +77,7 @@ class VardorvisCmd(Cmd):
         """
         Print feedback to console and log to file
         """
-        bang = colored("[!]", "yellow", attrs=["bold"])
-        vout = f"{bang} {message}"
+        vout = f"{BANG} {message}"
         self.pfeedback(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -86,7 +90,8 @@ class VardorvisCmd(Cmd):
         inner = f"[{timestamp}] [!]"
         colored_inner = colored(inner, "yellow", attrs=["bold"])
         vout = f"{colored_inner} {message}"
-        self.async_alert(vout)
+        with self.terminal_lock:
+            self.async_alert(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
 
@@ -94,8 +99,7 @@ class VardorvisCmd(Cmd):
         """
         Print error to console and log to file
         """
-        minus = colored("[-]", "red", attrs=["bold"])
-        vout = f"{minus} {message}"
+        vout = f"{MINUS} {message}"
         self.perror(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
@@ -108,7 +112,8 @@ class VardorvisCmd(Cmd):
         inner = f"[{timestamp}] [-]"
         colored_inner = colored(inner, "red", attrs=["bold"])
         vout = f"{colored_inner} {message}"
-        self.async_alert(vout)
+        with self.terminal_lock:
+            self.async_alert(vout)
         with open(self.logging_file, "a", encoding="utf-8") as f:
             f.write(f"{vout}\n")
 
@@ -125,7 +130,7 @@ class VardorvisCmd(Cmd):
 
         return statement
 
-    def do_exit(self, args):
+    def do_exit(self, _):
         """
         Exit the Vardorvis command line interface
         """
