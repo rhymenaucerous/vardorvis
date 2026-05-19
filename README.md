@@ -4,13 +4,16 @@ Vardorvis Command Line Interface. Some custom logging and asynchronous feedback 
 
 ## Features
 
-Logs to
+Logs to vardorvis.log. Creates a file if one does not exist and appends to that file otherwise.
 
 ## Set up your virtual environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate
+# Install poetry if you haven't already
+curl -sSL https://install.python-poetry.org | python3 -
+
+poetry install
+source .venv/bin/activate
 ```
 
 ## Installation
@@ -27,9 +30,9 @@ pip install vardorvis_cmd-0.4.0-py3-none-any.whl
 vard
 ```
 
-<img src="./README_Images/vardorvis_UI.gif" width="450" height="600">
+<img src="./README_Images/vard_UI.png" width="450" height="400">
 
-**Figure 1.** *Vardorvis UI GIF.*
+**Figure 1.** *Vardorvis UI displaying both regular and asynchronous output.*
 
 *ASCII art pulled from https://www.asciiart.eu/weapons/axes credit to Marcin Glinski*
 
